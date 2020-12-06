@@ -47,7 +47,8 @@ First, we need to construct a new URL to get back to data with the parameters fi
 <div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/1.jpg"/></center>
-
+  </div>
+<div align=center>
 <center>Figure 1: APPLE's historical price data</center>
 </div>
 We have collected data in the JSON file with every object contains all information about the stock price. And we just need the open and closed prices, the high and low prices, the adjusted closed price, and volume for each of the dates.
@@ -60,6 +61,8 @@ Then we manipulate the data that we have parsed previously as well as assigning 
 <div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/2.jpg"/></center> 
+    </div>
+  <div align=center>
 <center> 
 Figure 2: APPLE&#39;s stock price graph
 </center>
@@ -77,6 +80,8 @@ The one-hot encoding method works well when we deal with classification problems
 <div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/3.jpg"/></center>
+    </div>
+  <div align=center>
 <center>
 Figure 3: Integer encoding method
 </center>
@@ -124,6 +129,8 @@ We fetch the data of JPMorgan Chase. below is the close price from 01/2014 to 11
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/4.jpg"/>  
 </center>
+    </div>
+  <div align=center>
 <center>
 Figure 4: JPMorgan Chase close stock price
 </center>
@@ -137,6 +144,8 @@ Then we need to specify our loss and optimizer functions which we can implement 
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/5.jpg"/>
 </center>
+    </div>
+  <div align=center>
 <center>
 Figure 5: Model summary
 </center>
@@ -148,12 +157,16 @@ Then we train it with the fit function by passing the x\_train and y\_train. We 
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/5-1.jpg"/>
 </center>
+    </div>
+  <div align=center>
   </div>
 The loss we get is pretty low. However, the accuracy is low. That because even if we are very close to the answer that&#39;s not going to be considered accurate. For example, if our model can predict to 10 and the prices to 11. It is very close to the correct answer. So this model is actually working quite well.
   <div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/6.jpg"/>
 </center>
+      </div>
+    <div align=center>
 <center>
 Figure 6: JPMorgan Chase&#39;s prediction graph
 </center>
@@ -169,6 +182,8 @@ Start here, our next step work will focus on improving the model. Our model make
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/7.jpg"/>
 </center>
+    </div>
+  <div align=center>
 <center>
 Figure 7: Tesla&#39;s RNN method prediction results.
 </center>
