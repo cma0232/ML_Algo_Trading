@@ -44,11 +44,12 @@ For this project, we decided to go with Tiingo.com to retrieve data. This is ess
 **Fetch Data**
 
 First, we need to construct a new URL to get back to data with the parameters filled in. Generally, there are three parts to those API queries. Tiingo needs the stock name, the start date, and the end date to construct a URL as well as an authentication token or the API key. We need the base Tiingo URL and search for daily historical data of a particular stock. Then we punch the URL into a python program with the requests package and we can retrieve data. This retrieves the open and closed prices, the high and low prices, the adjusted closed price, and volume for each of the dates. Each of the data points is one day&#39;s worth of data and contains each of the above information. For example, we fetch APPLE&#39;s historical price data.
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/1.jpg"/></center>
 
 <center>Figure 1: APPLE's historical price data</center>
-
+</div>
 We have collected data in the JSON file with every object contains all information about the stock price. And we just need the open and closed prices, the high and low prices, the adjusted closed price, and volume for each of the dates.
 
 **Parse Data**
@@ -56,11 +57,14 @@ We have collected data in the JSON file with every object contains all informati
 We need to parse the data out into separate datasets. For the most part, we are just interested in six pieces of data: date, close, open, heigh, low, volume. Our JSON data is in an array. Within the array, we have a bunch of these objects, so we can just use a for loop to iterate through this JSON data and fetch each of the object, and then get the pieces we want.
 
 Then we manipulate the data that we have parsed previously as well as assigning labels and just overall building our training and testing sets. So we start by creating a function that will allow us to calculate the price differences. This will essentially be our labels as we are looking to see the differences between the price at the end of the day or closed price, and the open price the next day. We also create a function to help us assign these labels as well as just create our datasets. So we basically do all of the fetching, parsing, and data assignment in one function and that allows us easily create our training and testing datasets.
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/2.jpg"/></center> 
 <center> 
 Figure 2: APPLE&#39;s stock price graph
 </center>
+</div>
+
 We can see that the blue line is the open prices, and the orange line is the close prices.
 
 **One-Hot Encoding**
@@ -70,11 +74,13 @@ The label is the difference between the next day&#39;s open and the current day&
 We need to loop through the open prices and the closed prices and comparing them. We skip out on the very last closed point and skip out on the very first open point because we try to compare the current close to the next data points open. Then we can see if the open price on the next day is going to be greater than or equal to for that matter of the closed price of the current day. So if it&#39;s greater than or equal to we are going to say it&#39;s increased, and so we will append a [1, 0]. If it decreases then we append [0, 1]. This can help us fit into the model.
 
 The one-hot encoding method works well when we deal with classification problems. Realistically for this problem we could just use integer encoding, for example, increasing is 1, and decreasing is 0. But it has a shortcoming that it makes fitting stuff into the model a litter more complicated. Here is the Visualization graph of the integer encoding method.
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/3.jpg"/></center>
 <center>
 Figure 3: Integer encoding method
 </center>
+  </div>
 # Methods
 
 **Linear Regression**
@@ -114,36 +120,44 @@ The result of our accuracy is 63.63 percent. What we can do to improve this? Fir
 **Recurrent Neural Network**
 
 We fetch the data of JPMorgan Chase. below is the close price from 01/2014 to 11/2020.
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/4.jpg"/>  
 </center>
 <center>
 Figure 4: JPMorgan Chase close stock price
 </center>
+  </div>
 Then we use the MinMaxScaler function to normalize the data so that all the values are between 0 and 1. We try to eliminate the difference between the lower price and the higher price. Because we are not interested in using this data for the prices individually. We try to assess a trend based on how the prices have changed over time.
 
 We use 70% of the data as a training set and 30% as a test set. Then we build a model with a model object. And then we just add in our layers. We create the layers first and then add the input one by one. After that, we need to add a dense layer. The dense layer is simply going to take 1 as the outputs. That&#39;s because we just need the price to be outputted. And set the activation as &#39;sigmoid&#39;. We finish the model built.
 
 Then we need to specify our loss and optimizer functions which we can implement by the compile function. We use &#39;mean\_squared\_error&#39; as loss and &#39;adam&#39; as the optimizer.
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/5.jpg"/>
 </center>
 <center>
 Figure 5: Model summary
 </center>
+</div>
 As shown above, the model summary, help to tell how the model is structured overall. It tells us which layers we are using, the output shape at each layer, etc.
 
 Then we train it with the fit function by passing the x\_train and y\_train. We still need a score to show how well the model performed. The results are flowing:
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/5-1.jpg"/>
 </center>
+  </div>
 The loss we get is pretty low. However, the accuracy is low. That because even if we are very close to the answer that&#39;s not going to be considered accurate. For example, if our model can predict to 10 and the prices to 11. It is very close to the correct answer. So this model is actually working quite well.
+  <div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/6.jpg"/>
 </center>
 <center>
 Figure 6: JPMorgan Chase&#39;s prediction graph
 </center>
+    </div>
 For figure 6, the blue line is the real stock price we read in the beginning, the orange is the 70% training set and the green line is the 30% testing set. The training may a little off the blue original data but for the most part, actually follow the trends well.
 
 # Summary, Future Work
@@ -151,12 +165,14 @@ For figure 6, the blue line is the real stock price we read in the beginning, th
 Our first experiment uses basic linear regression to do the initial examination. Our main focus is actually on the second experiment. Keras is really helpful when we construct deep neural network models. In our project, we use a recurrent neural network and extend it to LSTM cells. LSTM cells help us to maintain a status and they give us more accurate results over time-series data. We split our data into a 70/30 status. We also compile it and learn how to use the fit function. We use the fit function to train the model and the predict function to test the model. And finally, we interpreted the results and plot the result.
 
 Start here, our next step work will focus on improving the model. Our model makes pretty good predictions now, but there is always room for improvement. We could learn to take other factors into accounts such as global news or the sentiment of people. For example, if we use the Tesla.Inc&#39;s stock price to train the model, the result is unsatisfactory (Figure 7). Tesla&#39;s stock price has risen wildly in recent years, rising by more than 1,000% in more than a year. The factors are very complicated, and our model does not consider these factors. We can see the green line is far away from the real data.
+<div align=center>
 <center>
 <img src="https://raw.githubusercontent.com/shiningMCH/ML_Algo_Trading/master/readme-assets/7.jpg"/>
 </center>
 <center>
 Figure 7: Tesla&#39;s RNN method prediction results.
 </center>
+  </div>
 As for now, our price prediction model is just based on what the close prices are. If we can add the global news or sentiment, then we have a way to increase our model and to account for all possible changes rather than just dwelling on the numbers.
 
 # References
