@@ -2,17 +2,7 @@
 # Machine Learning for Algorithmic Trading Strategy
 
 
-## Group 2:
 
-
-**Changhong Ma**
-
-Panther ID: 6169761
-
-
-**Hongjing Wang** 
-
-Panther ID: 6162083
 
 # Introduction
 
